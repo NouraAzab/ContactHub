@@ -100,6 +100,35 @@ header .logo-img{
 #addContactModal .btn.saveBtn:hover{
         box-shadow: 0px 10px 30px #8e51ff00, 0px 10px 30px #8e51ff75;
 }
+/* ================================================= */
+/* summary */
+.summary{
+    margin-top: 120px;
+}
+.summary span{
+    font-weight: 500;
+    color: #6a7282;
+}
+.summary .icon{
+    width: 50px;
+    height: 50px;
+    background-color: #1B67FE;
+
+}
+.summary .inner{
+    transition: box-shadow 0.3s ease;
+}
+
+.summary .inner:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    
+}
+/* ================================================= */
+
+
+
+
+
 
 
 
