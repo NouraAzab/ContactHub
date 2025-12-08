@@ -1,0 +1,145 @@
+
+body{
+    background-color: #F8FAFC;
+    height: 3000px;
+}
+
+/* header - nav */
+header nav .logo-icon{
+    width: 50px;
+    height: 50px;
+    background-color: #5C36F8;
+    color: white;
+    box-shadow: 1px 10px 30px #8e51ff52;
+
+}
+
+header nav .logo-icon i{
+    font-size: 18px;
+}
+
+/* ==================== */
+/* right side */
+header .addBtn{
+    background: linear-gradient(to right , #9c6edd , #5C36F8);
+    color: white;
+    font-weight: 500;
+}
+header .logo-img{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+/* ============================================== */
+/* modal */
+#addContactModal.modal{
+    --bs-modal-footer-border-width:none;
+}
+
+
+
+/* ================= */
+/* modal-body */
+/* to hide the scrollbar */
+
+.myModalBody.modal-body {
+    scrollbar-width: none;  /* Firefox */    
+    -ms-overflow-style: none;/* IE and Edge */
+}
+/* Chrome, Safari and Opera */
+.myModalBody.modal-body::-webkit-scrollbar {
+    display: none;
+}
+/* ---------------------- */
+
+.modal-body .changePhoto .photo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 30px;
+
+    background: linear-gradient(to right, #5f9fff, #5675b7);
+}
+/* ------------------------- */
+/* modal inputs */
+.required {
+    color: red;
+    margin-left: 2px; 
+}
+.modal .inputs .form-control:focus{
+    box-shadow: 0 0 0 2px #8e51ff4d;
+  border-color:#8e51ffc0;
+}
+.modal .inputs .myInput::placeholder{
+    font-size: 14px;
+    color: gray;
+}
+.modal .inputs .myInput.form-control:focus{
+    background-color: white !important;
+
+}
+
+
+/* ------------------------- */
+#addContactModal .btn{
+    background-color: rgb(243, 244, 246);
+    color: rgba(0, 0, 0, 0.63);
+    border: none;
+    font-weight:500;
+    
+}
+#addContactModal .btn:hover{
+    background-color: rgb(229, 231, 235);
+}
+#addContactModal .btn.saveBtn{
+    background: linear-gradient(to right , #9c6edd , #5C36F8);
+    color: rgba(255, 255, 255, 0.87);
+}
+#addContactModal .btn.saveBtn:hover{
+        box-shadow: 0px 10px 30px #8e51ff00, 0px 10px 30px #8e51ff75;
+}
+
+
+
+/* ///////////////////////////////////////////////////////////////////////// */
+/* ================================================= */
+/* modal btns responsive */
+
+@media (max-width:330px){
+    .modal .checks{
+        flex-wrap: wrap;
+
+    }
+}
+
+
+/* 0 to 768px */
+/* md */
+@media  (max-width:768px) { 
+    .myfooter .btn {
+        width: 100%;
+    }
+    .myfooter .btn.saveBtn{
+        order: -1;/*to be the first*/
+    }
+    .myfooter.modal-footer{
+        flex-wrap: wrap;
+    }
+    /* -------------- */
+    header .right i{
+        display: none;
+    }
+    
+}
+/* 640px to up */
+@media  (min-width:640px) { 
+    .myfooter .btn {
+        width: 50%;
+    }
+    .myfooter.modal-footer{
+        flex-wrap: nowrap;
+    }
+    
+}

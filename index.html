@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +12,152 @@
     <link rel="stylesheet" href="css/style.css">
     <title>ContactHub - Smart Contact Manager</title>
 </head>
-<body>
-    
 
-    
-    
+<body>
+
+    <header>
+        <nav class="navbar bg-white fixed-top ">
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="logo-icon d-flex justify-content-center align-items-center rounded-4 me-2">
+                        <i class="fas fa-address-book"></i>
+
+                    </div>
+                    <div class="logo-title">
+                        <h1 class="h3 mb-0 fw-bold">Contact<span style="color: #5C36F8;">Hub</span></h1>
+                        <p class="mb-0 text-muted small">Smart Contact Manager</p>
+
+                    </div>
+                </div>
+                <!-- ------------ -->
+                <div class="right">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="addBtn rounded-3 border-0 py-2 px-3 me-3" data-bs-toggle="modal"
+                        data-bs-target="#addContactModal">
+                        <span class="fw-bold me-2">+</span>add Contact
+                    </button>
+                    <i class="fas fa-bell me-3"></i>
+                    <i class="fas fa-gear me-3"></i>
+
+                    <div class="logo-img rounded-3 d-inline-block "> <img class="w-100 rounded-3"
+                            src="images/avatar-4.jpg" alt="logo img"> </div>
+
+
+
+                </div>
+
+
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- ============================================================================================== -->
+
+    <!-- modal [form] -->
+    <!-- Modal -->
+    <div class="modal " data-bs-backdrop="static" id="addContactModal" tabindex="-1"
+        aria-labelledby="addContactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4 fw-bold" id="addContactModalLabel">Add New Contact</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="myModalBody modal-body">
+                    <div class="changePhoto d-flex flex-column  align-items-center m-3">
+                        <div class="photo mb-3 d-flex justify-content-center align-items-center">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+
+                        <!-- new trick ^_^ -->
+                        <label class="btn btn-secondary">
+                            <i class=" fas fa-camera me-2"></i>Change Photo
+                            <input type="file" hidden>
+                        </label>
+
+                    </div>
+                    <!-- ================= -->
+                    <div class="inputs">
+                        <div class="mb-3">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" name="fullName" id="fullName"
+                                class="myInput form-control bg-secondary bg-opacity-10 " placeholder="Enter full name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber">Phone Number <span class="required">*</span></label>
+                            <input type="tel" name="phoneNumber" id="phoneNumber"
+                                class="myInput form-control bg-secondary bg-opacity-10 "
+                                placeholder="e.g., 01093074887">
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAddress">Email Address </label>
+                            <input type="email" name="emailAddress" id="emailAddress"
+                                class="myInput form-control bg-secondary bg-opacity-10 " placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address">Address </label>
+                            <input type="text" name="address" id="address"
+                                class="myInput form-control bg-secondary bg-opacity-10 " placeholder="Enter address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="group">Group</label>
+                            <select name="group" id="group" class="myInput form-control bg-secondary bg-opacity-10 ">
+                                <option selected>Select a group</option>
+                                <option value="family">Family</option>
+                                <option value="friends">Friends</option>
+                                <option value="work">Work</option>
+                                <option value="school">School</option>
+                                <option value="other">Other</option>
+
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="notes">Notes</label>
+                            <textarea style="resize: none;" name="notes" id="notes"
+                                class="myInput form-control bg-secondary bg-opacity-10 "
+                                placeholder="Add notes about this contact"></textarea>
+                        </div>
+                        <div class="checks d-flex">
+                            <div class="me-4">
+                                <input type="checkbox" id="fav" class="me-2">
+                                <label for="fav"><i class="fas fa-star text-warning "></i>
+                                    Favorite</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="emerg" class="me-2">
+                                <label for="emerg"><i class="fas fa-heart-broken text-danger"></i>
+                                    Emergency</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="modal-footer  myfooter">
+                        <button type="button" class="  my-btn btn  btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button"
+                            class="  my-btn btn saveBtn btn-primary d-flex justify-content-center align-items-center"><i
+                                style="font-size: 14px;" class="fas fa-check me-2"></i>
+                            Save Contact</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================================================== -->
+
+
+
+
+
 
 
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
