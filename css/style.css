@@ -139,6 +139,146 @@ header .logo-img{
 }
 
 /* ========================================== */
+/* the card of the contact */
+
+.contactCard .head-of-contact .img{
+    width: 55px;
+    height: 55px;
+    background-color:#F96900 ;
+
+}
+
+.head-of-contact .img span{
+    width: 22px;
+    height: 22px;
+
+}
+.head-of-contact .img span.start-100 {
+    left: 88% !important;
+}
+.head-of-contact .img i{
+    font-size: 10px;
+}
+/* --------------- */
+/* full name  +  phone */
+
+/* .head-of-contact i{ */
+.icon-decore{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+
+    transition: all 0.2s ease;
+
+    
+
+    
+    
+}
+.card .phone {
+    background-color: #DBEAFE;
+    color: #155DFC;
+}
+.card .email , 
+.be-purple{
+    background-color:#EDE9FE ;
+    color:#7F22FE ;   
+}
+.card .loc , 
+.be-green{
+    background-color: #D0FAE5;
+    color:#009966 ;
+}
+
+/* ====================== */
+
+/* card footer */
+/* Card shadow */
+.card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+    border: none;
+}
+
+.card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ----------- */
+
+/* Card footer icons */
+.card-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+.card-footer i {
+    transition: all 0.2s ;
+}
+.card-footer .fa-star:hover {
+    color: #ffc107 !important;
+    transform: scale(1.1);
+}
+
+/* -------------- */
+.card-footer .fa-heart:hover {
+    color: #dc3545 !important;
+    transform: scale(1.1);
+}
+
+/* -------------- */
+
+
+.card-footer .fa-pen:hover {
+    color: #0d6efd !important;
+    transform: scale(1.1);
+}
+
+/* ------------- */
+
+.card-footer .fa-trash:hover {
+    color: #dc3545 !important;
+    transform: scale(1.1);
+}
+
+.card-footer a.icon-decore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-footer a.icon-decore:active {
+    transform: translateY(0);
+}
+
+/* ================================================= */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ///////////////////////////////////////////////////////////////////////// */
