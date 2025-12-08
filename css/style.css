@@ -125,11 +125,20 @@ header .logo-img{
 }
 /* ================================================= */
 
+/* seacrch btn */
+.searchInput .form-control:focus{
+   
+  box-shadow: 0 0 0 2px #8e51ff4d;
+  border-color:#8e51ffc0;
+}
 
+#searchInput::placeholder , 
+.searchInput i{
+    font-size: 14px;
+    color: gray;
+}
 
-
-
-
+/* ========================================== */
 
 
 /* ///////////////////////////////////////////////////////////////////////// */
