@@ -67,13 +67,16 @@
                 <div class="myModalBody modal-body">
                     <div class="changePhoto d-flex flex-column  align-items-center m-3">
                         <div class="photo mb-3 d-flex justify-content-center align-items-center">
-                            <i class="fas fa-user text-white"></i>
+                            <!-- todo js :  img |  remove [d-none] for the icon-->
+                            <i id="userIcon" class="fas fa-user text-white "></i>
+                            <img id="userImg" src="images/placeholder.png" class="w-100 rounded-circle border-0 d-none" alt="">
+
                         </div>
 
                         <!-- new trick ^_^ -->
                         <label class="btn btn-secondary">
                             <i class=" fas fa-camera me-2"></i>Change Photo
-                            <input type="file" hidden>
+                            <input id="ContactImg" type="file" hidden>
                         </label>
 
                     </div>
@@ -81,52 +84,70 @@
                     <div class="inputs">
                         <div class="mb-3">
                             <label for="fullName">Full Name <span class="required">*</span></label>
-                            <input type="text" name="fullName" id="fullName"
-                                class="myInput form-control bg-secondary bg-opacity-10 " placeholder="Enter full name">
+                            <input oninput="validateInputs(this)" type="text" name="fullName" id="fullName"
+                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 " placeholder="Enter full name">
+                            <p id="fullNameMsg" class="text-danger d-none">
+                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                            </p>
                         </div>
                         <div class="mb-3">
                             <label for="phoneNumber">Phone Number <span class="required">*</span></label>
-                            <input type="tel" name="phoneNumber" id="phoneNumber"
-                                class="myInput form-control bg-secondary bg-opacity-10 "
-                                placeholder="e.g., 01093074887">
+                            <input oninput="validateInputs(this)" type="tel" name="phoneNumber" id="phoneNumber"
+                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 "
+                                placeholder="e.g., 01023587977">
+                            <p id="phoneNumberMsg" class="text-danger d-none">
+                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                            </p>
                         </div>
                         <div class="mb-3">
                             <label for="emailAddress">Email Address </label>
-                            <input type="email" name="emailAddress" id="emailAddress"
-                                class="myInput form-control bg-secondary bg-opacity-10 " placeholder="name@example.com">
+                            <input oninput="validateInputs(this)" type="email" name="emailAddress" id="emailAddress"
+                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 " placeholder="name@example.com">
+                            <p id="emailAddressMsg" class="text-danger d-none">
+                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                            </p>
                         </div>
                         <div class="mb-3">
                             <label for="address">Address </label>
-                            <input type="text" name="address" id="address"
-                                class="myInput form-control bg-secondary bg-opacity-10 " placeholder="Enter address">
+                            <input oninput="validateInputs(this)" type="text" name="address" id="address"
+                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 " placeholder="Enter address">
+                            <p id="addressMsg" class="text-danger d-none">
+                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                            </p>
                         </div>
                         <div class="mb-3">
                             <label for="group">Group</label>
-                            <select name="group" id="group" class="myInput form-control bg-secondary bg-opacity-10 ">
+                            <select onchange="validateInputs(this)" name="group" id="group" class="myInput is-invalid form-control bg-secondary bg-opacity-10 ">
                                 <option selected>Select a group</option>
-                                <option value="family">Family</option>
-                                <option value="friends">Friends</option>
-                                <option value="work">Work</option>
-                                <option value="school">School</option>
-                                <option value="other">Other</option>
+                                <option value="Family">Family</option>
+                                <option value="Friends">Friends</option>
+                                <option value="Work">Work</option>
+                                <option value="School">School</option>
+                                <option value="Other">Other</option>
 
 
                             </select>
+                            <p id="groupMsg" class="text-danger d-none">
+                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                            </p>
                         </div>
                         <div class="mb-3">
                             <label for="notes">Notes</label>
-                            <textarea style="resize: none;" name="notes" id="notes"
-                                class="myInput form-control bg-secondary bg-opacity-10 "
+                            <textarea oninput="validateInputs(this)" style="resize: none;" name="notes" id="notes"
+                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 "
                                 placeholder="Add notes about this contact"></textarea>
+                            <p id="notesMsg" class="text-danger d-none">
+                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                            </p>
                         </div>
                         <div class="checks d-flex">
                             <div class="me-4">
-                                <input type="checkbox" id="fav" class="me-2">
+                                <input onchange=""  type="checkbox" id="fav" class="me-2">
                                 <label for="fav"><i class="fas fa-star text-warning "></i>
                                     Favorite</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="emerg" class="me-2">
+                                <input onchange=""  type="checkbox" id="emerg" class="me-2">
                                 <label for="emerg"><i class="fas fa-heart-broken text-danger"></i>
                                     Emergency</label>
                             </div>
@@ -138,7 +159,7 @@
 
                     <div class="modal-footer  myfooter">
                         <button type="button" class="  my-btn btn  btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button"
+                        <button onclick="addContactInfo()" type="button"
                             class="  my-btn btn saveBtn btn-primary d-flex justify-content-center align-items-center"><i
                                 style="font-size: 14px;" class="fas fa-check me-2"></i>
                             Save Contact</button>
@@ -226,7 +247,7 @@
                             </div>
                             <!-- ======================= -->
                             <!-- the card of the contact -->
-                            <div class="contactCard row row-cols-1 row-cols-md-2  mt-4 g-4" style="background-color: green !important;">
+                            <div class="contactCard row row-cols-1 row-cols-md-2  mt-4 g-4" >
 
                                 <div class="col">
 
