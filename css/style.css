@@ -338,7 +338,20 @@ header .logo-img{
     /* width: 0; */
     scrollbar-width: none; 
 }
-
+/* ---------------- */
+.mysidebar .inner .fa-phone , 
+.mysidebar .inner .favSlide , 
+.mysidebar .inner .EmergencySlide{
+    transition: all .2s ease;
+}
+.mysidebar .inner .favSlide:hover , 
+.mysidebar .inner .EmergencySlide{
+    background-color: #FFF9EC !important;
+}
+.mysidebar .inner .fa-phone:hover{
+    background-color: #009966 ;
+    color: white;
+}
 /* ================= */
 @media (max-width: 991px) {
     .mysidebar {

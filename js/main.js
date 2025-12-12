@@ -26,6 +26,7 @@ todo* must : d-non if i donnot add email     loc     ...
 todo* style : when hover    fav tab   ... yellow
 todo* : group -> bages in desplay
 todo* : fav   - emer -> above the img
+todo style : make the page scrollable behind the modal
 todo : fav   - emer -> push in sidebar :)
 todo must : change the msg of the regex 
 todo : display summury ^^ easy ISA
@@ -46,7 +47,7 @@ todo : tab + enter = checked for check input [fav + emergency]
 
 
 
-
+? understand more more about   diff between      [onclick &  onchange]
 ? todo* : why when i add wrong img  +  emergency badge   ->    emergency style :(     search why Div solve the problem ^^   
 ? search why :    `\images/${contactImgInput.files[0].name}`     =>    [\]  before images  in the url is a fatel error why ?
 ? search why why don't work ^^     favBadge    =>    function toggleFav()
@@ -90,7 +91,8 @@ var emerToggleIcon = document.getElementById("emerToggleIcon");
 // console.log(favToggleIcon , emerToggleIcon);
 
 // --------------------
-
+var favContentList = JSON.parse(localStorage.getItem("favContentListData"));//for need it out displayFavContacts() only [but in the method , must be empty]
+displayFavContacts();
 
 
 //test:
@@ -98,6 +100,17 @@ var emerToggleIcon = document.getElementById("emerToggleIcon");
 
 //!========================== end global variables :
 
+//!========================== start addEventListener :
+// favToggleIcon.addEventListener("change" , function(){ //? todo ask ?search why "helllll" don't repeat ^^
+//    // console.log("helllll");
+//     addFavContacts();
+
+
+// });
+// // favToggleIcon.addEventListener("change" , function(){
+// //     toggleFav(index);
+// // })
+//!========================== end addEventListener :
 
 
 //!========================== start functions :
@@ -126,23 +139,28 @@ function setUserImg() {
 }
 //!=================================================
 function toggleFav(index) {
-    favToggleIcon.checked = !favToggleIcon.checked //toggle it
-    contactList[index].fav = !contactList[index].fav;
+    // favToggleIcon.checked = !favToggleIcon.checked //toggle it
+    contactList[index].fav = !contactList[index].fav;//toggle it
 
-
-    // ? search why why don't work ^^
+    // ? search why why don't work ^^ answer : must must render the page again with displayAllContacts() to make the badge appear 
     // var favBadge = document.getElementById("favBadge");
+    // console.log(favBadge);
     // if(contactList[index].fav ){
-    //     favBadge.classList.remove("d-none");
-    //     favBadge.classList.add("d-flex");
+    //     // favBadge.classList.remove("d-none");   //wrong
+    //     // favBadge.classList.add("d-flex");   //wrong
+    //     favBadge.classList.replace("d-none" , "d-flex");//replace [in the same place ] : it's the right solution ... due to the place of d-flex[before justify content etc]
+    //     console.log("yes");
 
     // }else{
-    //     favBadge.classList.remove("d-flex");
-    //     favBadge.classList.add("d-none");
+    //     // favBadge.classList.remove("d-flex");  //wrong
+    //     // favBadge.classList.add("d-none");  //wrong
+    //     favBadge.classList.replace("d-flex" , "d-none");
+
+    //     console.log("no");
 
     // }
-    displayAllContacts();//must do this step 
-    displayFavContacts();//must do this step
+    displayAllContacts();//must do this step   because [contact] object Info is updated with [fav]
+    displayFavContacts();//must do this step   because [contact] object Info is updated with [fav]
 
 
     // console.log(favToggleIcon.checked);
@@ -150,8 +168,8 @@ function toggleFav(index) {
 }
 //!=================================================
 function toggleEmer(index) {
-    emerToggleIcon.checked = !emerToggleIcon.checked //toggle it
-    contactList[index].emerg = !contactList[index].emerg;
+    // emerToggleIcon.checked = !emerToggleIcon.checked 
+    contactList[index].emerg = !contactList[index].emerg;//toggle it
 
     displayAllContacts();//must do this step   
     displayEmergencyContacts();//must do this step
@@ -350,6 +368,64 @@ function displayAllContacts() {
 }
 //!=================================================
 
+//!==========start sidebar
+function displayFavContacts() {
+    favContentList = [];//must be empty ... due to pushing each time and looping from the first contact  ^^
+    var cartona = "";
+    for (var i = 0; i < contactList.length; ++i) {
+        if (contactList[i].fav) {
+            favContentList.push(contactList[i]);
+            cartona += `
+            <div class="col  ">
+                                            <div class="favSlide p-2 rounded-2 d-flex justify-content-between align-items-center "
+                                                style="background-color: #F8FAFC;">
+
+                                                <div class="d-flex align-items-center ">
+                                                    <div style="background-color: #FF8000;"
+                                                        class="img-contact text-center mysidebar-icon-decore shadow-sm me-2">
+
+                                                        <!-- todo* js : take firstChar of [first + last name] in the arr of fullName -->
+                                                        <!-- todo* js     img |  h4         one of them -->
+
+                                                        ${contactList[i].ImgURL === "" ?
+                    `<h4  class=" h5 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4>`
+                    : `<div class = "user-img"><img  src="${contactList[i].ImgURL}" alt="${contactList[i].fullName.split(" ")[0]}" class="w-100 rounded-2"></div >`}
+
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 style="font-size: 14px;" class="mb-1">${contactList[i].fullName}</h4>
+                                                        <span  class="text-secondary d-block small">${contactList[i].phoneNumber}</span>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <a href="tel:${contactList[i].phoneNumber}" class="text-decoration-none">
+                                                    <span
+                                                        class="fas fa-phone icon-decore be-green ">
+                                                    </span>
+                                                    
+                                                </a>
+
+                                            </div>
+                                        </div>
+
+            
+            
+            `;
+
+
+        }
+    }
+    document.getElementById("rowFavData").innerHTML = cartona;
+    localStorage.setItem("favContentListData", JSON.stringify(favContentList));//update localStorage ^^
+    // console.log(favContentList);
+
+}
+
+
+//!=================================================
 
 
 
@@ -359,6 +435,7 @@ function displayAllContacts() {
 
 
 
+//!==========end sidebar
 //!========================== end functions :
 //!========================== start validation :
 // Generic validation Function   =>  T | F
