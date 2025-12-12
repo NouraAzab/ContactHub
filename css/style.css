@@ -147,10 +147,17 @@ header .logo-img{
     background-color:#F96900 ;
 
 }
+.contactCard .head-of-contact .img .user-img{
+    /* border: 5px solid rgb(106, 252, 191); */
+    width: 100% ;
+    height: 100% ;
+}
 
 .head-of-contact .img span{
     width: 22px;
+    width: 40%;
     height: 22px;
+    height: 40%;
 
 }
 .head-of-contact .img span.start-100 {
@@ -219,6 +226,7 @@ header .logo-img{
 }
 
 .card-footer i {
+    cursor: pointer;
     transition: all 0.2s ;
 }
 .card-footer .fa-star:hover {
@@ -227,6 +235,7 @@ header .logo-img{
 }
 
 /* -------------- */
+.card-footer .fa-heart-broken:hover , 
 .card-footer .fa-heart:hover {
     color: #dc3545 !important;
     transform: scale(1.1);

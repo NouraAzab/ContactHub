@@ -69,14 +69,14 @@
                         <div class="photo mb-3 d-flex justify-content-center align-items-center">
                             <!-- todo js :  img |  remove [d-none] for the icon-->
                             <i id="userIcon" class="fas fa-user text-white "></i>
-                            <img id="userImg" src="images/placeholder.png" class="w-100 rounded-circle border-0 d-none" alt="">
+                            <img id="userImg" src="images/placeholder.png" class="w-100 rounded-circle border-0 d-none" style="font-size: 16px;" alt="user_img">
 
                         </div>
 
                         <!-- new trick ^_^ -->
                         <label class="btn btn-secondary">
                             <i class=" fas fa-camera me-2"></i>Change Photo
-                            <input id="ContactImg" type="file" hidden>
+                            <input onchange="setUserImg()" id="ContactImg" type="file" hidden>
                         </label>
 
                     </div>
@@ -102,7 +102,7 @@
                         <div class="mb-3">
                             <label for="emailAddress">Email Address </label>
                             <input oninput="validateInputs(this)" type="email" name="emailAddress" id="emailAddress"
-                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 " placeholder="name@example.com">
+                                class="myInput  form-control bg-secondary bg-opacity-10 " placeholder="name@example.com">
                             <p id="emailAddressMsg" class="text-danger d-none">
                                 Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
                             </p>
@@ -110,14 +110,14 @@
                         <div class="mb-3">
                             <label for="address">Address </label>
                             <input oninput="validateInputs(this)" type="text" name="address" id="address"
-                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 " placeholder="Enter address">
+                                class="myInput  form-control bg-secondary bg-opacity-10 " placeholder="Enter address">
                             <p id="addressMsg" class="text-danger d-none">
                                 Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
                             </p>
                         </div>
                         <div class="mb-3">
                             <label for="group">Group</label>
-                            <select onchange="validateInputs(this)" name="group" id="group" class="myInput is-invalid form-control bg-secondary bg-opacity-10 ">
+                            <select onchange="validateInputs(this)" name="group" id="group" class="myInput  form-control bg-secondary bg-opacity-10 ">
                                 <option selected>Select a group</option>
                                 <option value="Family">Family</option>
                                 <option value="Friends">Friends</option>
@@ -134,7 +134,7 @@
                         <div class="mb-3">
                             <label for="notes">Notes</label>
                             <textarea oninput="validateInputs(this)" style="resize: none;" name="notes" id="notes"
-                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 "
+                                class="myInput  form-control bg-secondary bg-opacity-10 "
                                 placeholder="Add notes about this contact"></textarea>
                             <p id="notesMsg" class="text-danger d-none">
                                 Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
@@ -142,7 +142,8 @@
                         </div>
                         <div class="checks d-flex">
                             <div class="me-4">
-                                <input onchange=""  type="checkbox" id="fav" class="me-2">
+                                <!-- todo remove -->
+                                <input   type="checkbox" id="fav" class="me-2">
                                 <label for="fav"><i class="fas fa-star text-warning "></i>
                                     Favorite</label>
                             </div>
@@ -247,116 +248,10 @@
                             </div>
                             <!-- ======================= -->
                             <!-- the card of the contact -->
-                            <div class="contactCard row row-cols-1 row-cols-md-2  mt-4 g-4" >
+                            <div id="rowData" class="contactCard row row-cols-1 row-cols-md-2  mt-4 g-4" >
 
-                                <div class="col">
-
-
-                                    <div class="card ">
-                                        <div class="card-body ">
-
-
-                                            <div class="head-of-contact d-flex align-items-center  mb-4">
-                                                <!--todo ask     d-flex justify-content-center align-items-center     is wrong  why? -->
-
-                                                <!-- img of the contact -->
-                                                <div
-                                                    class="img rounded-2  text-center pt-3 shadow mb-2 position-relative me-3 mt-2 ">
-
-
-                                                    <!-- todo js : take firstChar of [first + last name] in the arr of fullName -->
-                                                    <!-- todo js     img |  h4         one of them -->
-                                                    <!-- <img src="" alt="" class="w-100"> -->
-                                                    <h4 class=" h5 fw-bold text-white ">NM</h4>
-
-
-
-                                                    <!-- todo   js : if i clicked -->
-                                                    <!-- fav & emer   badges on the img  -->
-                                                    <span
-                                                        class="fav d-flex justify-content-center align-items-center bg-warning rounded-circle  position-absolute top-0 start-100 translate-middle border-white border"><i
-                                                            class="fa-solid fa-star text-white"></i>
-                                                    </span>
-                                                    <span
-                                                        class="emergency d-flex justify-content-center align-items-center bg-danger rounded-circle  position-absolute end-0 start-100 translate-middle border-white border"><i
-                                                            class="fa-solid fa-heart-crack text-white"></i>
-                                                    </span>
-
-                                                </div>
-
-                                                <!-- full name  +  phone -->
-                                                <!-- todo js -->
-                                                <div>
-                                                    <h4 style="font-size: 18px;" class=" fw-bold ">Noura Azab Monged
-                                                    </h4>
-
-
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="fas fa-phone icon-decore phone me-2"></i>
-                                                        <span class="text-secondary">01023587977</span>
-                                                    </div>
-
-                                                </div>
-
-
-
-
-
-
-
-                                            </div>
-
-
-                                            <div class="d-flex align-items-center mt-2">
-                                                <i class="fas fa-envelope icon-decore phone me-2 email"></i>
-                                                <span class="text-secondary ">nora.azab135@gmail.com</span>
-                                            </div>
-
-
-                                            <div class="d-flex align-items-center mt-2">
-                                                <i class="fas fa-location-dot icon-decore phone me-2 loc"></i>
-                                                <span class="text-secondary">zefta-gharbia-egypt</span>
-                                            </div>
-
-                                            <div class="badges mt-4">
-                                                <span class="badge be-green me-2">Friendes</span>
-                                                <span class="badge bg-danger bg-opacity-10 text-danger">Emergency</span>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class=" card-footer d-flex justify-content-between align-items-center">
-
-                                            <div class="d-flex py-2">
-                                                <!-- todo js  tel:   &  mailto: -->
-                                                <a href="tel:01023587977"
-                                                    class=" text-decoration-none icon-decore be-green me-2"><i
-                                                        class="fa-solid fa-phone"></i></a>
-                                                <a href="mailto:nora.azab135@gmail.com"
-                                                    class="text-decoration-none icon-decore be-purple "><i
-                                                        class="fa-solid fa-envelope"></i></a>
-
-                                            </div>
-
-
-                                            <div>
-                                                <!-- todo    vip:   remove [fa-regular]   add [fas  , text-warning ] -->
-                                                <i class="ms-2 text-secondary fa-regular fa-star"></i>
-                                                <!-- <i class="                    fas        fa-star text-warning"></i> -->
-
-                                                <i class="ms-2 text-secondary fa-regular fa-heart"></i>
-                                                <!-- <i class="                    fas         fa-heart text-danger"></i> -->
-
-                                                <i class="ms-2 text-secondary fa-solid fa-pen"></i>
-                                                <i class="ms-2 text-secondary fas fa-trash"></i>
-
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                               
+                                
 
 
 
@@ -523,6 +418,16 @@
     </main>
 
 
+    <!-- <div class="w-50 m-auto nour"> -->
+        
+        <!-- <label > -->
+             <!-- <i class="fas fa-star text-warning "><input onclick="t()" type="checkbox" id="favv" hidden></i> -->
+        <!-- </label> -->
+        <!-- <br> -->
+        <!-- <input type="checkbox" id="emm">em -->
+
+
+    <!-- </div>  -->
 
 
 
