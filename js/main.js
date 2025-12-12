@@ -14,26 +14,27 @@ vip todo
 todo :   check what happen when choose [Select a group] ???? why still danger color?
 todo also for notes ... why when nothing do  ...still danger
 ------
-todo* must : why when i change the img of the user .. donot change at the same time?
+// todo must : why when i change the img of the user .. donot change at the same time?
 todo VIP  :check the phone must be unique to addContact ^^
-todo*      : fill alt of the imgs 
-todo*      : when i press saveContact btn  -> close    it depends ^_^
-todo must : when click enter [type = submit] for btn   save Contact
+// todo      : fill alt of the imgs 
+// todo      : when i press saveContact btn  -> close    it depends ^_^
+todo must : when click enter [type = submit] for btn   save Contact                        ask:)))
 
 --------------------
 Yalla bena now :)
-todo* must : d-non if i donnot add email     loc     ...
-todo* style : when hover    fav tab   ... yellow
-todo* : group -> bages in desplay
-todo* : fav   - emer -> above the img
+// todo must : d-non if i donnot add email     loc     ...
+// todo style : when hover    fav tab   ... yellow
+// todo : group -> bages in desplay
+// todo : fav   - emer -> above the img
 todo style : make the page scrollable behind the modal
-todo* : fav   - emer -> push in sidebar :)
+// todo : fav   - emer -> push in sidebar :)
 todo must : change the msg of the regex 
 todo : display summury ^^ easy ISA
 todo : search
-todo : edit + update
+// todo : edit + update
+// todo : clear modal
 todo : delete
-
+todo :  Esc btn => clearInputs() else ^^  addEventLisner + onkeyup()
 todo* : when toggle fav & emer  in card footer  =>   add &  remove from sidebar        Ya hallaaaa :)
 -----/////
 
@@ -79,6 +80,7 @@ var contactemergInput = document.getElementById("emerg");
 // --------------------
 var userImg = document.getElementById("userImg");
 var userIconElement = document.getElementById("userIcon");
+var currentIndexToUpdate;
 
 
 // --------------------
@@ -162,18 +164,27 @@ function toggleFav(index) {
     //     console.log("no");
 
     // }
+    //?-------------------------
+
+
+
+    localStorage.setItem("contactListData", JSON.stringify(contactList));//must do this step   because [contact] object Info is updated with [fav]
+    // todo wow =================
+    //the most important part :))))    
+    //contactListData  is the main -> if it's updated    ,  favcontactListData will update ^^
     displayAllContacts();//must do this step   because [contact] object Info is updated with [fav]
     displayFavContacts();//must do this step   because [contact] object Info is updated with [fav]
 
-
-    // console.log(favToggleIcon.checked);
-    // console.log(index , contactList[index].fav);
+    // console.log(index, contactList[index].fav);
+    // console.log(JSON.parse(localStorage.getItem("contactListData")));
 }
 //!=================================================
 function toggleEmer(index) {
     // emerToggleIcon.checked = !emerToggleIcon.checked 
     contactList[index].emerg = !contactList[index].emerg;//toggle it
 
+
+    localStorage.setItem("contactListData", JSON.stringify(contactList));//must do this step   because [contact] object Info is updated with [fav]
     displayAllContacts();//must do this step   
     displayEmergencyContacts();//must do this step
 
@@ -217,8 +228,10 @@ function addContactInfo() {
         displayAllContacts();         //must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
         displayFavContacts();//must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
         displayEmergencyContacts();//must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
+        clearInputs()
 
-        console.log(contactList);
+        // console.log(contactList);
+        // console.log(contactfavInput.checked);
     }
 
 
@@ -353,7 +366,7 @@ function displayAllContacts() {
 
 
 
-                                                <i class="ms-2 text-secondary fa-solid fa-pen"></i>
+                                                <i onclick="editContact(${i})" class="ms-2 text-secondary fa-solid fa-pen"></i>
                                                 <i class="ms-2 text-secondary fas fa-trash"></i>
 
 
@@ -370,6 +383,7 @@ function displayAllContacts() {
     }
 
     document.getElementById("rowData").innerHTML = cartona;
+    // console.log(contactList);
 }
 //!=================================================
 
@@ -424,7 +438,7 @@ function displayFavContacts() {
         }
     }
     document.getElementById("rowFavData").innerHTML = cartona;
-    localStorage.setItem("favContentListData", JSON.stringify(favContentList));//update localStorage ^^
+    localStorage.setItem("favContentListData", JSON.stringify(favContentList));//update localStorage with what we pushed ^^
     // console.log(favContentList);
 
 }
@@ -481,21 +495,113 @@ function displayEmergencyContacts() {
         }
     }
     document.getElementById("rowEmergencyData").innerHTML = cartona;
-    localStorage.setItem("emergencyContentListData", JSON.stringify(emergencyContentList));//update localStorage ^^
+    localStorage.setItem("emergencyContentListData", JSON.stringify(emergencyContentList));//update localStorage with what we pushed ^^
     // console.log(emergencyContentList);
 
 
 }
 
-//!=================================================
-
-
-
-
-
-
 
 //!==========end sidebar
+//!=================================================
+//!==========start edit & update
+var myModal = new bootstrap.Modal(document.getElementById("addContactModal"));
+
+function editContact(index) {
+
+    //will fill the modal inputs^^
+    contactFullNameInput.value = contactList[index].fullName;
+    contactImgInput.value = contactList[index].ImgURL;
+    contactphoneNumberInput.value = contactList[index].phoneNumber;
+    contactemailAddressInput.value = contactList[index].emailAddress;
+    contactaddressInput.value = contactList[index].address;
+    contactgroupInput.value = contactList[index].group;
+    contactnotesInput.value = contactList[index].notes;
+
+    contactList[index].fav ? contactfavInput.checked = true
+        : contactfavInput.checked = false;
+
+    contactList[index].emerg ? contactemergInput.checked = true
+        : contactemergInput.checked = false;
+
+    // ----------------------
+    //todo*  open the modal
+    myModal.show();
+    
+
+    // ----------------------
+    document.querySelector(".saveBtn").classList.replace("d-flex", "d-none");//hide
+    document.querySelector(".updateBtn").classList.replace("d-none", "d-flex");//show
+    currentIndexToUpdate = index;// to make  [update function] know the [index] of the [contact] i update ^^ make it globally
+
+
+
+
+
+}
+//!=================================================
+//like add typically^^
+function updateContact() {
+    //will catch the values from edit  ->  update them
+    if (validateInputs(contactFullNameInput) &&
+        validateInputs(contactphoneNumberInput)) {
+        // -------------------
+        var contact = {
+            ImgURL: setUserImg(),
+            fullName: contactFullNameInput.value,
+            phoneNumber: contactphoneNumberInput.value,
+            emailAddress: contactemailAddressInput.value,
+            address: contactaddressInput.value,
+            group: contactgroupInput.value,
+            notes: contactnotesInput.value,
+            fav: (contactfavInput.checked || favToggleIcon.checked),
+            emerg: (contactemergInput.checked || emerToggleIcon.checked),
+
+
+        };
+
+        // -----------------------
+        contactList.splice(currentIndexToUpdate, 1, contact);//remove   then   add  =  update :)
+        document.querySelector(".saveBtn").classList.replace("d-none", "d-flex");//show
+        document.querySelector(".updateBtn").classList.replace("d-flex", "d-none");//hide
+        // -----------------------
+        //must :)
+        localStorage.setItem("contactListData", JSON.stringify(contactList));
+        displayAllContacts();
+        displayFavContacts();
+        displayEmergencyContacts();
+        clearInputs();
+
+        //todo*  close the modal
+        // myModal.hide();
+        // console.log(currentIndexToUpdate);
+
+
+    }
+
+}
+//!=================================================
+function clearInputs() {
+    contactFullNameInput.value = null;
+    contactImgInput.value = "";//not null  ..  due to the conditions in displayAllContacts()
+    contactphoneNumberInput.value = null;
+    contactemailAddressInput.value = null;
+    contactaddressInput.value = null;
+    contactgroupInput.value = "Select a group";     
+    // contactgroupInput.value = null;    
+    // todo VIP : the problem happened [when i used  clearInputs() before clsing the Modal => so group will be null]
+    contactnotesInput.value = null;
+    contactfavInput.checked = false;
+    contactemergInput.checked = false;
+
+
+
+}
+
+
+//!==========end edit & update
+//!=================================================
+
 //!========================== end functions :
 //!========================== start validation :
 // Generic validation Function   =>  T | F
@@ -562,3 +668,5 @@ function validateInputs(inputElement) {
 
 //  test.toggleAttribute("btn-primary")
 
+// var m = new bootstrap.Modal(document.getElementById("addContactModal"));
+// m.show();

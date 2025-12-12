@@ -62,7 +62,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-4 fw-bold" id="addContactModalLabel">Add New Contact</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button onclick="clearInputs()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="myModalBody modal-body">
                     <div class="changePhoto d-flex flex-column  align-items-center m-3">
@@ -74,7 +74,7 @@
                         </div>
 
                         <!-- new trick ^_^ -->
-                        <label class="btn btn-secondary">
+                        <label class="my-btn btn btn-secondary">
                             <i class=" fas fa-camera me-2"></i>Change Photo
                             <input onchange="setUserImg()" id="ContactImg" type="file" hidden>
                         </label>
@@ -159,11 +159,13 @@
 
 
                     <div class="modal-footer  myfooter">
-                        <button type="button" class="  my-btn btn  btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="  my-btn btn  btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button onclick="addContactInfo()" type="button"
                             class="  my-btn btn saveBtn btn-primary d-flex justify-content-center align-items-center"><i
                                 style="font-size: 14px;" class="fas fa-check me-2"></i>
                             Save Contact</button>
+
+                        <button onclick="updateContact()" type="submit" class="updateBtn btn btn-warning shadow-sm d-none justify-content-center align-items-center">Update Contact</button>
                     </div>
                 </div>
             </div>
