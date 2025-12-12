@@ -33,7 +33,7 @@ todo : display summury ^^ easy ISA
 todo : search
 // todo : edit + update
 // todo : clear modal
-todo : delete
+// todo : delete
 todo :  Esc btn => clearInputs() else ^^  addEventLisner + onkeyup()
 todo* : when toggle fav & emer  in card footer  =>   add &  remove from sidebar        Ya hallaaaa :)
 -----/////
@@ -367,8 +367,7 @@ function displayAllContacts() {
 
 
                                                 <i onclick="editContact(${i})" class="ms-2 text-secondary fa-solid fa-pen"></i>
-                                                <i class="ms-2 text-secondary fas fa-trash"></i>
-
+                                                <i onclick = "deleteContact(${i})" class="ms-2 text-secondary fas fa-trash"></i>
 
                                             </div>
 
@@ -597,7 +596,22 @@ function clearInputs() {
 
 
 }
+//!=================================================
+function deleteContact(index){
+    contactList.splice(index , 1);
 
+    //must :)
+    //1- update localStorage  [contactList] => favcontactList & emergencycontactList  will be updated ^^
+    localStorage.setItem("contactListData" , JSON.stringify(contactList))
+    //all display functions ^^
+    //2-displayAll  & displayFav  displayEmergency
+    displayAllContacts();
+    displayFavContacts();
+    displayEmergencyContacts();
+    
+
+    
+}
 
 //!==========end edit & update
 //!=================================================
