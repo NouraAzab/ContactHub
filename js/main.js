@@ -11,11 +11,10 @@
 //--------------------------
 /*
 vip todo
-todo :   check what happen when choose [Select a group] ???? why still danger color?
-todo also for notes ... why when nothing do  ...still danger
+// todo :   check what happen when choose [Select a group] ???? why still danger color?
+// todo also for notes ... why when nothing do  ...still danger
 ------
 // todo must : why when i change the img of the user .. donot change at the same time?
-todo VIP  :check the phone must be unique to addContact ^^
 // todo      : fill alt of the imgs 
 // todo      : when i press saveContact btn  -> close    it depends ^_^
 todo must : when click enter [type = submit] for btn   save Contact                        ask:)))
@@ -28,9 +27,11 @@ Yalla bena now :)
 // todo : fav   - emer -> above the img
 todo style : make the page scrollable behind the modal
 // todo : fav   - emer -> push in sidebar :)
-todo must : change the msg of the regex 
-todo : display summury ^^ easy ISA
-todo : search
+// todo must : change the msg of the regex 
+// todo : display summury ^^ easy ISA
+// todo VIP  :check the phone must be unique to addContact ^^
+
+// todo : search
 // todo : edit + update
 // todo : clear modal
 // todo : delete
@@ -81,7 +82,8 @@ var contactemergInput = document.getElementById("emerg");
 var userImg = document.getElementById("userImg");
 var userIconElement = document.getElementById("userIcon");
 var currentIndexToUpdate;
-
+var searchInput = document.getElementById("searchInput");
+// console.log(searchInput);
 
 // --------------------
 var contactList = JSON.parse(localStorage.getItem("contactListData")) || [];// for the first time for the agenda ^_^
@@ -98,6 +100,9 @@ displayFavContacts();
 
 var emergencyContentList = JSON.parse(localStorage.getItem("emergencyContentListData"));
 displayEmergencyContacts();
+
+//must here :) to sure that , there are      favContentList   &    emergencyContentList   are already founded ^^
+displaySummary();
 
 
 //test:
@@ -170,10 +175,12 @@ function toggleFav(index) {
 
     localStorage.setItem("contactListData", JSON.stringify(contactList));//must do this step   because [contact] object Info is updated with [fav]
     // todo wow =================
+    //must :)
     //the most important part :))))    
     //contactListData  is the main -> if it's updated    ,  favcontactListData will update ^^
     displayAllContacts();//must do this step   because [contact] object Info is updated with [fav]
     displayFavContacts();//must do this step   because [contact] object Info is updated with [fav]
+    displaySummary();
 
     // console.log(index, contactList[index].fav);
     // console.log(JSON.parse(localStorage.getItem("contactListData")));
@@ -184,17 +191,36 @@ function toggleEmer(index) {
     contactList[index].emerg = !contactList[index].emerg;//toggle it
 
 
+    //must :)
     localStorage.setItem("contactListData", JSON.stringify(contactList));//must do this step   because [contact] object Info is updated with [fav]
     displayAllContacts();//must do this step   
     displayEmergencyContacts();//must do this step
+    displaySummary();
 
+
+}
+//!=================================================
+function checkUniquePhone(phone) {
+    for (var i = 0; i < contactList.length; ++i) {
+        if (contactList[i].phoneNumber === phone) {
+
+            document.getElementById("phoneNumberMsg").classList.remove("d-none");
+            document.getElementById("phoneNumberMsg").innerText = `phone must be unique :(`
+
+            contactphoneNumberInput.classList.remove("is-valid");//Not must [is-invalid] has  speciificity heigher^^
+            contactphoneNumberInput.classList.add("is-invalid");
+
+            return false; // will exit the fun and stop looping ^^
+        }
+    }
+    return true;
 }
 //!=================================================
 
 function addContactInfo() {
     //only [phoneNumber & FullName] are required to make a contact ^^
     if (validateInputs(contactFullNameInput) &&
-        validateInputs(contactphoneNumberInput)) {
+        validateInputs(contactphoneNumberInput) && checkUniquePhone(contactphoneNumberInput.value)) {
         // validateInputs(contactemailAddressInput) &&
         // validateInputs(contactaddressInput) &&
         // validateInputs(contactgroupInput) &&
@@ -224,10 +250,12 @@ function addContactInfo() {
 
         // -----------------------
         contactList.push(Contact);
+        //must :)
         localStorage.setItem("contactListData", JSON.stringify(contactList));
         displayAllContacts();         //must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
         displayFavContacts();//must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
         displayEmergencyContacts();//must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
+        displaySummary();
         clearInputs()
 
         // console.log(contactList);
@@ -240,8 +268,17 @@ function addContactInfo() {
 //!=================================================
 function displayAllContacts() {
     var cartona = "";
+    var userTirm = searchInput.value.trim();
+    console.log(userTirm);
     for (var i = 0; i < contactList.length; ++i) {
-        cartona += `
+        if (contactList[i].fullName.toLowerCase().includes(userTirm.toLowerCase()) ||
+            contactList[i].phoneNumber.includes(userTirm) ||
+            contactList[i].emailAddress.toLowerCase().includes(userTirm.toLowerCase()) ||
+            contactList[i].address.toLowerCase().includes(userTirm.toLowerCase()) ||
+            contactList[i].group.toLowerCase().includes(userTirm.toLowerCase()) ||
+            contactList[i].notes.toLowerCase().includes(userTirm.toLowerCase())) {
+
+            cartona += `
         <div class="col">
 
 
@@ -262,8 +299,8 @@ function displayAllContacts() {
                                                     <!-- todo* "done" js     img |  h4         one of them -->
 
                                                     ${contactList[i].ImgURL === "" ?
-                `<div class = "user-img"><h4  class=" h5 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4></div >`
-                : `<div class = "user-img"><img  src="${contactList[i].ImgURL}" alt="${contactList[i].fullName.split(" ")[0]}" class="w-100 rounded-2"></div >`}
+                    `<div class = "user-img"><h4  class=" h5 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4></div >`
+                    : `<div class = "user-img"><img  src="${contactList[i].ImgURL}" alt="${contactList[i].fullName.split(" ")[0]}" class="w-100 rounded-2"></div >`}
                                                     
                                                     
 
@@ -378,6 +415,8 @@ function displayAllContacts() {
         
         
         `;
+        }
+
 
     }
 
@@ -503,6 +542,59 @@ function displayEmergencyContacts() {
 
 //!==========end sidebar
 //!=================================================
+function displaySummary() {
+    document.getElementById("summaryData").innerHTML = `
+    <div class="col">
+                        <div
+                            class="inner bg-white d-flex justify-content-start align-items-center p-4 rounded-4 shadow-sm">
+                            <div
+                                class="icon text-white rounded-3 d-flex justify-content-center align-items-center me-3 shadow">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <div>
+                                <span class="text-muted text-uppercase d-block">Total</span>
+                                <h3 class="h4 fw-bold">${contactList.length}</h3>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div
+                            class="inner bg-white d-flex justify-content-start align-items-center p-4 rounded-4 shadow-sm">
+                            <div style="background-color: #FF8000;"
+                                class="icon text-white rounded-3 d-flex justify-content-center align-items-center me-3 shadow">
+                                <i class="fa-solid fa-star"></i>
+
+                            </div>
+                            <div>
+                                <span class="text-muted text-uppercase d-block">Favorites</span>
+                                <h3 class="h4 fw-bold">${favContentList.length}</h3>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div
+                            class="inner bg-white d-flex justify-content-start align-items-center p-4 rounded-4 shadow-sm">
+                            <div style="background-color: #ED0027;"
+                                class="icon text-white rounded-3 d-flex justify-content-center align-items-center me-3 shadow">
+                                <i class="fa-solid fa-heart-crack"></i>
+
+                            </div>
+                            <div>
+                                <span class="text-muted text-uppercase d-block">Emergency</span>
+                                <h3 class="h4 fw-bold">${emergencyContentList.length}</h3>
+                            </div>
+                        </div>
+
+                    </div>
+    
+    `;
+
+}
+//!=================================================
 //!==========start edit & update
 var myModal = new bootstrap.Modal(document.getElementById("addContactModal"));
 
@@ -526,7 +618,7 @@ function editContact(index) {
     // ----------------------
     //todo*  open the modal
     myModal.show();
-    
+
 
     // ----------------------
     document.querySelector(".saveBtn").classList.replace("d-flex", "d-none");//hide
@@ -569,6 +661,7 @@ function updateContact() {
         displayAllContacts();
         displayFavContacts();
         displayEmergencyContacts();
+        displaySummary();
         clearInputs();
 
         //todo*  close the modal
@@ -583,34 +676,41 @@ function updateContact() {
 function clearInputs() {
     contactFullNameInput.value = null;
     contactImgInput.value = "";//not null  ..  due to the conditions in displayAllContacts()
+    //must :)
+    contactImgInput.files[0] = undefined; //no img is entered
+    setUserImg();
+
     contactphoneNumberInput.value = null;
     contactemailAddressInput.value = null;
     contactaddressInput.value = null;
-    contactgroupInput.value = "Select a group";     
+    contactgroupInput.value = "Select a group";
     // contactgroupInput.value = null;    
     // todo VIP : the problem happened [when i used  clearInputs() before clsing the Modal => so group will be null]
     contactnotesInput.value = null;
     contactfavInput.checked = false;
     contactemergInput.checked = false;
 
+    //todo  need to make msg of the validation empty
+
 
 
 }
 //!=================================================
-function deleteContact(index){
-    contactList.splice(index , 1);
+function deleteContact(index) {
+    contactList.splice(index, 1);
 
     //must :)
     //1- update localStorage  [contactList] => favcontactList & emergencycontactList  will be updated ^^
-    localStorage.setItem("contactListData" , JSON.stringify(contactList))
+    localStorage.setItem("contactListData", JSON.stringify(contactList))
     //all display functions ^^
     //2-displayAll  & displayFav  displayEmergency
     displayAllContacts();
     displayFavContacts();
     displayEmergencyContacts();
-    
+    displaySummary();
 
-    
+
+
 }
 
 //!==========end edit & update
@@ -629,7 +729,7 @@ function validateInputs(inputElement) {
         //last soluthion .. because .. there is no an arabic capital letter  ^^
         // خدي بالك من المسافات عربي وانجليزي
         // fullName   : /^[A-Z][a-zA-Z0-9_ ]{2,50}$|^[\u0600-\u06ff ]{3,51}$/,    //same regex
-        fullName: /^([A-Z][a-zA-Z0-9_ ]{2,50}|[\u0600-\u06ff ]{3,51})$/,      //same regex
+        fullName: /^([a-zA-Z ]{2,50}|[\u0600-\u06ff ]{2,50})$/,      //same regex
         phoneNumber: /^(\+2)?01(0|1|2|5)[0-9]{8}$/,//01023587977
 
         // emailAddress : /^[a-zA-Z0-9_.-]+@(gmail|yahoo)\.com$/,//noRa_a.z-ab135@gmail.com
@@ -643,7 +743,7 @@ function validateInputs(inputElement) {
     var regexName = inputElement.id
     var msgElement = document.getElementById(`${regexName}Msg`);//fullNameMsg
     // ----------------------
-    if (inputsRegex[regexName].test(inputElement.value)) {
+    if (inputsRegex[regexName].test(inputElement.value.trim())) {
 
         // console.log("valid");
         //valid

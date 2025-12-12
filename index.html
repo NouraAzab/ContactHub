@@ -87,7 +87,8 @@
                             <input oninput="validateInputs(this)" type="text" name="fullName" id="fullName"
                                 class="myInput is-invalid form-control bg-secondary bg-opacity-10 " placeholder="Enter full name">
                             <p id="fullNameMsg" class="text-danger d-none">
-                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                                <!-- Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only. -->
+                                Name should contain only letters and spaces (2-50 characters)
                             </p>
                         </div>
                         <div class="mb-3">
@@ -96,7 +97,8 @@
                                 class="myInput is-invalid form-control bg-secondary bg-opacity-10 "
                                 placeholder="e.g., 01023587977">
                             <p id="phoneNumberMsg" class="text-danger d-none">
-                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                                <!-- Enter a valid phone number "Egyptian numbers only" :) -->
+                                Please enter a valid Egyptian phone number
                             </p>
                         </div>
                         <div class="mb-3">
@@ -104,7 +106,7 @@
                             <input oninput="validateInputs(this)" type="email" name="emailAddress" id="emailAddress"
                                 class="myInput  form-control bg-secondary bg-opacity-10 " placeholder="name@example.com">
                             <p id="emailAddressMsg" class="text-danger d-none">
-                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                                Enter a valid emailAddress like name@example.com :)
                             </p>
                         </div>
                         <div class="mb-3">
@@ -112,7 +114,7 @@
                             <input oninput="validateInputs(this)" type="text" name="address" id="address"
                                 class="myInput  form-control bg-secondary bg-opacity-10 " placeholder="Enter address">
                             <p id="addressMsg" class="text-danger d-none">
-                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
+                                Enter a valid address , at least 4 characters :) 
                             </p>
                         </div>
                         <div class="mb-3">
@@ -127,18 +129,18 @@
 
 
                             </select>
-                            <p id="groupMsg" class="text-danger d-none">
-                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
-                            </p>
+                            <!-- <p id="groupMsg" class="text-danger d-none">
+                                only these values (Family | Friends | Work | School | Othe) or leave "Select a group" as it is to choose nothing :)
+                            </p> -->
                         </div>
                         <div class="mb-3">
                             <label for="notes">Notes</label>
                             <textarea oninput="validateInputs(this)" style="resize: none;" name="notes" id="notes"
                                 class="myInput  form-control bg-secondary bg-opacity-10 "
                                 placeholder="Add notes about this contact"></textarea>
-                            <p id="notesMsg" class="text-danger d-none">
-                                Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only.
-                            </p>
+                            <!-- <p id="notesMsg" class="text-danger d-none">
+                                can u enter or no :)
+                            </p> -->
                         </div>
                         <div class="checks d-flex">
                             <div class="me-4">
@@ -175,53 +177,11 @@
     <main>
         <section class="summary">
             <div class="container">
-                <div class="row row-cols-2 row-cols-lg-3 g-3">
-                    <div class="col">
-                        <div
-                            class="inner bg-white d-flex justify-content-start align-items-center p-4 rounded-4 shadow-sm">
-                            <div
-                                class="icon text-white rounded-3 d-flex justify-content-center align-items-center me-3 shadow">
-                                <i class="fa-solid fa-users"></i>
-                            </div>
-                            <div>
-                                <span class="text-muted text-uppercase d-block">Total</span>
-                                <h3 class="h4 fw-bold">6</h3>
-                            </div>
-                        </div>
+                <div id="summaryData" class="row row-cols-2 row-cols-lg-3 g-3">
+                    
 
-                    </div>
 
-                    <div class="col">
-                        <div
-                            class="inner bg-white d-flex justify-content-start align-items-center p-4 rounded-4 shadow-sm">
-                            <div style="background-color: #FF8000;"
-                                class="icon text-white rounded-3 d-flex justify-content-center align-items-center me-3 shadow">
-                                <i class="fa-solid fa-star"></i>
 
-                            </div>
-                            <div>
-                                <span class="text-muted text-uppercase d-block">Favorites</span>
-                                <h3 class="h4 fw-bold">4</h3>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col">
-                        <div
-                            class="inner bg-white d-flex justify-content-start align-items-center p-4 rounded-4 shadow-sm">
-                            <div style="background-color: #ED0027;"
-                                class="icon text-white rounded-3 d-flex justify-content-center align-items-center me-3 shadow">
-                                <i class="fa-solid fa-heart-crack"></i>
-
-                            </div>
-                            <div>
-                                <span class="text-muted text-uppercase d-block">Emergency</span>
-                                <h3 class="h4 fw-bold">5</h3>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </section>
@@ -245,7 +205,7 @@
                             <div class="searchInput   mt-2 position-relative">
                                 <i
                                     class="fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y  ms-3     text-muted"></i>
-                                <input type="text" class="form-control ps-5 " id="searchInput"
+                                <input oninput="displayAllContacts()" type="text" class="form-control ps-5 " id="searchInput"
                                     placeholder="Search by name, phone, or email...">
                             </div>
                             <!-- ======================= -->
