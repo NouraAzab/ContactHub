@@ -27,14 +27,14 @@ todo* style : when hover    fav tab   ... yellow
 todo* : group -> bages in desplay
 todo* : fav   - emer -> above the img
 todo style : make the page scrollable behind the modal
-todo : fav   - emer -> push in sidebar :)
+todo* : fav   - emer -> push in sidebar :)
 todo must : change the msg of the regex 
 todo : display summury ^^ easy ISA
 todo : search
 todo : edit + update
 todo : delete
 
-todo : when toggle fav & emer  in card footer  =>   add &  remove from sidebar        Ya hallaaaa :)
+todo* : when toggle fav & emer  in card footer  =>   add &  remove from sidebar        Ya hallaaaa :)
 -----/////
 
 
@@ -93,6 +93,9 @@ var emerToggleIcon = document.getElementById("emerToggleIcon");
 // --------------------
 var favContentList = JSON.parse(localStorage.getItem("favContentListData"));//for need it out displayFavContacts() only [but in the method , must be empty]
 displayFavContacts();
+
+var emergencyContentList = JSON.parse(localStorage.getItem("emergencyContentListData"));
+displayEmergencyContacts();
 
 
 //test:
@@ -211,7 +214,9 @@ function addContactInfo() {
         // -----------------------
         contactList.push(Contact);
         localStorage.setItem("contactListData", JSON.stringify(contactList));
-        displayAllContacts();
+        displayAllContacts();         //must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
+        displayFavContacts();//must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
+        displayEmergencyContacts();//must .. because when make add -> contact info is updated , so we need to render the page again with the new updates^_^
 
         console.log(contactList);
     }
@@ -426,8 +431,63 @@ function displayFavContacts() {
 
 
 //!=================================================
+function displayEmergencyContacts() {
+    emergencyContentList = [];//must be empty ... due to pushing each time and looping from the first contact  ^^
+    var cartona = "";
+    for (var i = 0; i < contactList.length; ++i) {
+        if (contactList[i].emerg) {
+            emergencyContentList.push(contactList[i]);
+            cartona += `
+            <div class="col  ">
+                                            <div class="EmergencySlide p-2 rounded-2 d-flex justify-content-between align-items-center"
+                                                style="background-color: #F8FAFC;">
+
+                                                <div class="d-flex align-items-center ">
+                                                    <div style="background-color: #FF8000;"
+                                                        class="img-contact text-center mysidebar-icon-decore shadow-sm me-2">
+
+                                                        <!-- todo* js : take firstChar of [first + last name] in the arr of fullName -->
+                                                        <!-- todo* js     img |  h4         one of them -->
+
+                                                        ${contactList[i].ImgURL === "" ?
+                    `<h4  class=" h5 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4>`
+                    : `<div class = "user-img"><img  src="${contactList[i].ImgURL}" alt="${contactList[i].fullName.split(" ")[0]}" class="w-100 rounded-2"></div >`}
+
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 style="font-size: 14px;" class="mb-1">${contactList[i].fullName}</h4>
+                                                        <span  class="text-secondary d-block small">${contactList[i].phoneNumber}</span>
 
 
+                                                    </div>
+                                                </div>
+
+                                                <a href="tel:${contactList[i].phoneNumber}" class="text-decoration-none">
+                                                    <span
+                                                        class="fas fa-phone icon-decore be-green ">
+                                                    </span>
+                                                    
+                                                </a>
+
+                                            </div>
+                                        </div>
+
+            
+            
+            `;
+
+
+        }
+    }
+    document.getElementById("rowEmergencyData").innerHTML = cartona;
+    localStorage.setItem("emergencyContentListData", JSON.stringify(emergencyContentList));//update localStorage ^^
+    // console.log(emergencyContentList);
+
+
+}
+
+//!=================================================
 
 
 

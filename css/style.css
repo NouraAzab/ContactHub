@@ -344,9 +344,11 @@ header .logo-img{
 .mysidebar .inner .EmergencySlide{
     transition: all .2s ease;
 }
-.mysidebar .inner .favSlide:hover , 
-.mysidebar .inner .EmergencySlide{
+.mysidebar .inner .favSlide:hover{
     background-color: #FFF9EC !important;
+}
+.mysidebar .inner .EmergencySlide:hover{
+    background-color: #FBEAEC !important;
 }
 .mysidebar .inner .fa-phone:hover{
     background-color: #009966 ;
