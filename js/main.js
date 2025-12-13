@@ -25,6 +25,7 @@ Yalla bena now :)
 // todo style : when hover    fav tab   ... yellow
 // todo : group -> bages in desplay
 // todo : fav   - emer -> above the img
+// todo : while i search .. color what is matched :))
 todo style : make the page scrollable behind the modal
 // todo : fav   - emer -> push in sidebar :)
 // todo must : change the msg of the regex 
@@ -268,15 +269,33 @@ function addContactInfo() {
 //!=================================================
 function displayAllContacts() {
     var cartona = "";
-    var userTirm = searchInput.value.trim();
-    console.log(userTirm);
+    var userTirm = searchInput.value.trim().toLowerCase();
+    // console.log(userTirm);
     for (var i = 0; i < contactList.length; ++i) {
-        if (contactList[i].fullName.toLowerCase().includes(userTirm.toLowerCase()) ||
+        if (contactList[i].fullName.toLowerCase().includes(userTirm) ||
             contactList[i].phoneNumber.includes(userTirm) ||
-            contactList[i].emailAddress.toLowerCase().includes(userTirm.toLowerCase()) ||
-            contactList[i].address.toLowerCase().includes(userTirm.toLowerCase()) ||
-            contactList[i].group.toLowerCase().includes(userTirm.toLowerCase()) ||
-            contactList[i].notes.toLowerCase().includes(userTirm.toLowerCase())) {
+            contactList[i].emailAddress.toLowerCase().includes(userTirm) ||
+            contactList[i].address.toLowerCase().includes(userTirm) ||
+            contactList[i].group.toLowerCase().includes(userTirm) ||
+            contactList[i].notes.toLowerCase().includes(userTirm)) {
+
+                //color what is matched :)
+                // replaceAll(tirm , `<span class="bg-warning">${tirm}</span>`)
+                // txt.innerHTML = txt.innerText.replaceAll(userTirm , `<span class="bg-warning">${userTirm}</span>`) 
+                function changeMatchedTextBg(txt){
+                    var newTxt =``;
+                    for(var i=0 ; i<txt.length ; ++i){
+                        if(userTirm.includes(txt[i].toLowerCase()))
+                            newTxt+=`<span class="bg-warning">${txt[i]}</span>`;
+                        else
+                            newTxt+=txt[i];
+                            
+                    } 
+                    return newTxt;
+                }
+                // console.log(changeBg("hello world"));
+                
+
 
             cartona += `
         <div class="col">
@@ -299,7 +318,7 @@ function displayAllContacts() {
                                                     <!-- todo* "done" js     img |  h4         one of them -->
 
                                                     ${contactList[i].ImgURL === "" ?
-                    `<div class = "user-img"><h4  class=" h5 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4></div >`
+                    `<div class = "user-img"><h4  class=" h6 fw-bold text-white pt-3">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4></div >`
                     : `<div class = "user-img"><img  src="${contactList[i].ImgURL}" alt="${contactList[i].fullName.split(" ")[0]}" class="w-100 rounded-2"></div >`}
                                                     
                                                     
@@ -323,13 +342,16 @@ function displayAllContacts() {
                                                 <!-- full name  +  phone -->
                                                 <!-- todo js -->
                                                 <div>
-                                                    <h4 style="font-size: 18px;" class=" fw-bold ">${contactList[i].fullName}
+                                                    <!-- <h4 style="font-size: 17px;" class=" fw-bold ">${(contactList[i].fullName.replaceAll(userTirm.toUpperCase() , `<span class="bg-warning">${userTirm.toUpperCase()}</span>`) || 
+                                                                                                    contactList[i].fullName.replaceAll(userTirm.toLowerCase() , `<span class="bg-warning">${userTirm.toLowerCase()}</span>`))}
+                                                    </h4> -->
+                                                    <h4 style="font-size: 17px;" class=" fw-bold ">${ changeMatchedTextBg(contactList[i].fullName)}
                                                     </h4>
 
 
                                                     <div class="d-flex align-items-center">
                                                         <i class="fas fa-phone icon-decore phone me-2"></i>
-                                                        <span class="text-secondary">${contactList[i].phoneNumber}</span>
+                                                        <span class="text-secondary">${changeMatchedTextBg(contactList[i].phoneNumber)}</span>
                                                     </div>
 
                                                 </div>
@@ -345,17 +367,17 @@ function displayAllContacts() {
 
                                             <div class="${contactList[i].emailAddress.trim() === "" ? `d-none` : `d-flex`} align-items-center mt-2 ">
                                                 <i class="fas fa-envelope icon-decore phone me-2 email"></i>
-                                                <span class="text-secondary ">${contactList[i].emailAddress}</span>
+                                                <span class="text-secondary ">${changeMatchedTextBg(contactList[i].emailAddress)}</span>
                                             </div>
 
 
                                             <div class="${contactList[i].address.trim() === "" ? `d-none` : `d-flex`} align-items-center mt-2">
                                                 <i class="fas fa-location-dot icon-decore phone me-2 loc"></i>
-                                                <span class="text-secondary">${contactList[i].address}</span>
+                                                <span class="text-secondary">${changeMatchedTextBg(contactList[i].address)}</span>
                                             </div>
 
                                             <div class="badges mt-4">
-                                                <span class="badge be-green me-2 ${contactList[i].group === "Select a group" ? `d-none` : `d-inline`}">${contactList[i].group}</span>
+                                                <span class="badge be-green me-2 ${contactList[i].group === "Select a group" ? `d-none` : `d-inline`}">${changeMatchedTextBg(contactList[i].group)}</span>
                                                 <span class="badge bg-danger bg-opacity-10 text-danger ${contactList[i].emerg ? `d-inline` : `d-none`}">Emergency</span>
 
                                             </div>
@@ -445,7 +467,7 @@ function displayFavContacts() {
                                                         <!-- todo* js     img |  h4         one of them -->
 
                                                         ${contactList[i].ImgURL === "" ?
-                    `<h4  class=" h5 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4>`
+                    `<h4  class=" h6 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4>`
                     : `<div class = "user-img"><img  src="${contactList[i].ImgURL}" alt="${contactList[i].fullName.split(" ")[0]}" class="w-100 rounded-2"></div >`}
 
                                                     </div>
@@ -502,7 +524,7 @@ function displayEmergencyContacts() {
                                                         <!-- todo* js     img |  h4         one of them -->
 
                                                         ${contactList[i].ImgURL === "" ?
-                    `<h4  class=" h5 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4>`
+                    `<h4  class=" h6 fw-bold text-white pt-2">${contactList[i].fullName[0] + contactList[i].fullName.split(" ").slice(-1)[0][0]}</h4>`
                     : `<div class = "user-img"><img  src="${contactList[i].ImgURL}" alt="${contactList[i].fullName.split(" ")[0]}" class="w-100 rounded-2"></div >`}
 
                                                     </div>
@@ -602,7 +624,7 @@ function editContact(index) {
 
     //will fill the modal inputs^^
     contactFullNameInput.value = contactList[index].fullName;
-    contactImgInput.value = contactList[index].ImgURL;
+    // contactImgInput.value = contactList[index].ImgURL;
     contactphoneNumberInput.value = contactList[index].phoneNumber;
     contactemailAddressInput.value = contactList[index].emailAddress;
     contactaddressInput.value = contactList[index].address;
