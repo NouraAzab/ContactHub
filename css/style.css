@@ -1,0 +1,411 @@
+
+body{
+    background-color: #F8FAFC;
+    height: 3000px;
+}
+
+/* header - nav */
+header nav .logo-icon{
+    width: 50px;
+    height: 50px;
+    background-color: #5C36F8;
+    color: white;
+    box-shadow: 1px 10px 30px #8e51ff52;
+
+}
+
+header nav .logo-icon i{
+    font-size: 18px;
+}
+
+/* ==================== */
+/* right side */
+header .addBtn{
+    background: linear-gradient(to right , #9c6edd , #5C36F8);
+    color: white;
+    font-weight: 500;
+}
+header .logo-img{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+/* ============================================== */
+/* modal */
+#addContactModal.modal{
+    --bs-modal-footer-border-width:none;
+}
+
+
+
+/* ================= */
+/* modal-body */
+/* to hide the scrollbar */
+
+.myModalBody.modal-body {
+    scrollbar-width: none;  /* Firefox */    
+    -ms-overflow-style: none;/* IE and Edge */
+}
+/* Chrome, Safari and Opera */
+.myModalBody.modal-body::-webkit-scrollbar {
+    display: none;
+}
+/* ---------------------- */
+
+.modal-body .changePhoto .photo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 30px;
+
+    background: linear-gradient(to right, #5f9fff, #5675b7);
+}
+/* ------------------------- */
+/* modal inputs */
+.required {
+    color: red;
+    margin-left: 2px; 
+}
+.modal .inputs .form-control:focus{
+    box-shadow: 0 0 0 2px #8e51ff4d;
+  border-color:#8e51ffc0;
+}
+.modal .inputs .myInput::placeholder{
+    font-size: 14px;
+    color: gray;
+}
+.modal .inputs .myInput.form-control:focus{
+    background-color: white !important;
+
+}
+
+
+/* ------------------------- */
+#addContactModal .my-btn{
+    background-color: rgb(243, 244, 246);
+    color: rgba(0, 0, 0, 0.63);
+    border: none;
+    font-weight:500;
+    
+}
+#addContactModal .my-btn:hover{
+    background-color: rgb(229, 231, 235);
+}
+#addContactModal .my-btn.saveBtn{
+    background: linear-gradient(to right , #9c6edd , #5C36F8);
+    color: rgba(255, 255, 255, 0.87);
+}
+#addContactModal .my-btn.saveBtn:hover{
+        box-shadow: 0px 10px 30px #8e51ff00, 0px 10px 30px #8e51ff75;
+}
+/* ================================================= */
+/* summary */
+.summary{
+    margin-top: 120px;
+}
+.summary span{
+    font-weight: 500;
+    color: #6a7282;
+}
+.summary .icon{
+    width: 50px;
+    height: 50px;
+    background-color: #1B67FE;
+
+}
+.summary .inner{
+    transition: box-shadow 0.3s ease;
+}
+
+.summary .inner:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    
+}
+/* ================================================= */
+
+/* seacrch btn */
+.searchInput .form-control:focus{
+   
+  box-shadow: 0 0 0 2px #8e51ff4d;
+  border-color:#8e51ffc0;
+}
+
+#searchInput::placeholder , 
+.searchInput i{
+    font-size: 14px;
+    color: gray;
+}
+
+/* ========================================== */
+/* the card of the contact */
+
+.contactCard .head-of-contact .img{
+    width: 55px;
+    height: 55px;
+    background-color:#F96900 ;
+
+}
+.contactCard .head-of-contact .img .user-img{
+    /* border: 5px solid rgb(106, 252, 191); */
+    width: 100% ;
+    height: 100% ;
+}
+
+.head-of-contact .img span{
+    width: 22px;
+    width: 40%;
+    height: 22px;
+    height: 40%;
+
+}
+.head-of-contact .img span.start-100 {
+    left: 88% !important;
+}
+.head-of-contact .img i{
+    font-size: 10px;
+}
+/* --------------- */
+/* full name  +  phone */
+
+/* .head-of-contact i{ */
+.icon-decore{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+
+    transition: all 0.2s ease;
+
+    
+
+    
+    
+}
+.card .phone {
+    background-color: #DBEAFE;
+    color: #155DFC;
+}
+.card .email , 
+.be-purple{
+    background-color:#EDE9FE ;
+    color:#7F22FE ;   
+}
+.card .loc , 
+.be-green{
+    background-color: #D0FAE5;
+    color:#009966 ;
+}
+
+/* ====================== */
+
+/* card footer */
+/* Card shadow */
+.card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+    border: none;
+}
+
+.card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ----------- */
+
+/* Card footer icons */
+.card-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+.card-footer i {
+    cursor: pointer;
+    transition: all 0.2s ;
+}
+.card-footer .fa-star:hover {
+    color: #ffc107 !important;
+    transform: scale(1.1);
+}
+
+/* -------------- */
+.card-footer .fa-heart-broken:hover , 
+.card-footer .fa-heart:hover {
+    color: #dc3545 !important;
+    transform: scale(1.1);
+}
+
+/* -------------- */
+
+
+.card-footer .fa-pen:hover {
+    color: #0d6efd !important;
+    transform: scale(1.1);
+}
+
+/* ------------- */
+
+.card-footer .fa-trash:hover {
+    color: #dc3545 !important;
+    transform: scale(1.1);
+}
+
+.card-footer a.icon-decore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-footer a.icon-decore:active {
+    transform: translateY(0);
+}
+
+/* ================================================= */
+/* sidebar */
+
+.mysidebar-icon-decore{
+    width: 40px; 
+    height: 40px;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px;
+    /* transition: all 0.3s ease; */
+
+}
+.mysidebar .fa-star{
+    background-color: #FF8000;
+     color: white; 
+
+}
+.mysidebar .fa-heart-broken{
+    background-color: #F30438 !important;
+}
+.mysidebar , 
+.mysidebar-Fav ,
+.mysidebar-Emergency{
+    
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.mysidebar-Fav ,
+.mysidebar-Emergency{
+      /* background-color: rgb(0, 47, 255) !important; */
+      min-height: 200px ;
+
+}
+
+/* sidebar header */
+.mysidebar header {
+    padding: 1rem !important;
+}
+
+.mysidebar header h4 {
+    font-size: 1.1rem;
+}
+
+.mysidebar header p {
+    /* color: #6c757d; */
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+
+/* //////////////////////////////////// */
+
+
+.mysidebar .inner {
+    /* background-color: red; */
+    max-height: 500px; 
+    overflow-y: auto;
+    overflow-x: hidden;/* Prevent horizontal scroll*/
+}
+
+.mysidebar .inner .container {
+    padding: 0 1rem;
+    max-width: 100%;
+}
+.mysidebar .inner::-webkit-scrollbar{
+    /* to cancel the scrollbar ^^ */
+    /* width: 0; */
+    scrollbar-width: none; 
+}
+/* ---------------- */
+.mysidebar .inner .fa-phone , 
+.mysidebar .inner .favSlide , 
+.mysidebar .inner .EmergencySlide{
+    transition: all .2s ease;
+}
+.mysidebar .inner .favSlide:hover{
+    background-color: #FFF9EC !important;
+}
+.mysidebar .inner .EmergencySlide:hover{
+    background-color: #FBEAEC !important;
+}
+.mysidebar .inner .fa-phone:hover{
+    background-color: #009966 ;
+    color: white;
+}
+/* ================= */
+@media (max-width: 991px) {
+    .mysidebar {
+    /* min-height: 100px; */
+
+        margin-bottom: 1.5rem;
+    }
+    
+    .mysidebar .inner {
+        /* min-height: 100px; */
+        max-height: 400px;
+    }
+}
+
+
+/* ///////////////////////////////////////////////////////////////////////// */
+/* ================================================= */
+/* modal btns responsive */
+
+@media (max-width:330px){
+    .modal .checks{
+        flex-wrap: wrap;
+
+    }
+}
+
+/* 0 to 768px */
+/* md */
+@media  (max-width:768px) { 
+    .myfooter .btn {
+        width: 100%;
+    }
+    .myfooter .btn.saveBtn , 
+    .myfooter .btn.updateBtn{
+        order: -1;/*to be the first*/
+    }
+    .myfooter.modal-footer{
+        flex-wrap: wrap;
+    }
+    /* -------------- */
+    header .right i{
+        display: none;
+    }
+    
+}
+/* 640px to up */
+@media  (min-width:640px) { 
+    .myfooter .btn {
+        width: 50%;
+    }
+    .myfooter.modal-footer{
+        flex-wrap: nowrap;
+    }
+    
+}

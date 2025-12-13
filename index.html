@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +12,342 @@
     <link rel="stylesheet" href="css/style.css">
     <title>ContactHub - Smart Contact Manager</title>
 </head>
-<body>
-    
 
-    
-    
+<body>
+
+    <header>
+        <nav class="navbar bg-white fixed-top ">
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="logo-icon d-flex justify-content-center align-items-center rounded-4 me-2">
+                        <i class="fas fa-address-book"></i>
+
+                    </div>
+                    <div class="logo-title">
+                        <h1 class="h3 mb-0 fw-bold">Contact<span style="color: #5C36F8;">Hub</span></h1>
+                        <p class="mb-0 text-muted small">Smart Contact Manager</p>
+
+                    </div>
+                </div>
+                <!-- ------------ -->
+                <div class="right">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="addBtn rounded-3 border-0 py-2 px-3 me-3" data-bs-toggle="modal"
+                        data-bs-target="#addContactModal">
+                        <span class="fw-bold me-2">+</span>add Contact
+                    </button>
+                    <i class="fas fa-bell me-3"></i>
+                    <i class="fas fa-gear me-3"></i>
+
+                    <div class="logo-img rounded-3 d-inline-block "> <img class="w-100 rounded-3"
+                            src="images/avatar-4.jpg" alt="logo img"> </div>
+
+
+
+                </div>
+
+
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- ============================================================================================== -->
+
+    <!-- modal [form] -->
+    <!-- Modal -->
+    <div class="modal " data-bs-backdrop="static" id="addContactModal" tabindex="-1"
+        aria-labelledby="addContactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4 fw-bold" id="addContactModalLabel">Add New Contact</h1>
+                    <button onclick="clearInputs()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="myModalBody modal-body">
+                    <div class="changePhoto d-flex flex-column  align-items-center m-3">
+                        <div class="photo mb-3 d-flex justify-content-center align-items-center">
+                            <!-- todo js :  img |  remove [d-none] for the icon-->
+                            <i id="userIcon" class="fas fa-user text-white "></i>
+                            <img id="userImg" src="images/placeholder.png" class="w-100 rounded-circle border-0 d-none" style="font-size: 16px;" alt="user_img">
+
+                        </div>
+
+                        <!-- new trick ^_^ -->
+                        <label class="my-btn btn btn-secondary">
+                            <i class=" fas fa-camera me-2"></i>Change Photo
+                            <input onchange="setUserImg()" id="ContactImg" type="file" hidden>
+                        </label>
+
+                    </div>
+                    <!-- ================= -->
+                    <div class="inputs">
+                        <div class="mb-3">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input oninput="validateInputs(this)" type="text" name="fullName" id="fullName"
+                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 " placeholder="Enter full name">
+                            <p id="fullNameMsg" class="text-danger d-none">
+                                <!-- Enter a valid Full Name: start with a capital letter, 3-25 chars, letters/numbers/underscore/space only. -->
+                                Name should contain only letters and spaces (2-50 characters)
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber">Phone Number <span class="required">*</span></label>
+                            <input oninput="validateInputs(this)" type="tel" name="phoneNumber" id="phoneNumber"
+                                class="myInput is-invalid form-control bg-secondary bg-opacity-10 "
+                                placeholder="e.g., 01023587977">
+                            <p id="phoneNumberMsg" class="text-danger d-none">
+                                <!-- Enter a valid phone number "Egyptian numbers only" :) -->
+                                Please enter a valid Egyptian phone number
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAddress">Email Address </label>
+                            <input oninput="validateInputs(this)" type="email" name="emailAddress" id="emailAddress"
+                                class="myInput  form-control bg-secondary bg-opacity-10 " placeholder="name@example.com">
+                            <p id="emailAddressMsg" class="text-danger d-none">
+                                Enter a valid emailAddress like name@example.com :)
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address">Address </label>
+                            <input oninput="validateInputs(this)" type="text" name="address" id="address"
+                                class="myInput  form-control bg-secondary bg-opacity-10 " placeholder="Enter address">
+                            <p id="addressMsg" class="text-danger d-none">
+                                Enter a valid address , at least 4 characters :) 
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="group">Group</label>
+                            <select onchange="validateInputs(this)" name="group" id="group" class="myInput  form-control bg-secondary bg-opacity-10 ">
+                                <option selected>Select a group</option>
+                                <option value="Family">Family</option>
+                                <option value="Friends">Friends</option>
+                                <option value="Work">Work</option>
+                                <option value="School">School</option>
+                                <option value="Other">Other</option>
+
+
+                            </select>
+                            <!-- <p id="groupMsg" class="text-danger d-none">
+                                only these values (Family | Friends | Work | School | Othe) or leave "Select a group" as it is to choose nothing :)
+                            </p> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="notes">Notes</label>
+                            <textarea oninput="validateInputs(this)" style="resize: none;" name="notes" id="notes"
+                                class="myInput  form-control bg-secondary bg-opacity-10 "
+                                placeholder="Add notes about this contact"></textarea>
+                            <!-- <p id="notesMsg" class="text-danger d-none">
+                                can u enter or no :)
+                            </p> -->
+                        </div>
+                        <div class="checks d-flex">
+                            <div class="me-4">
+                                <!-- todo remove -->
+                                <input   type="checkbox" id="fav" class="me-2">
+                                <label for="fav"><i class="fas fa-star text-warning "></i>
+                                    Favorite</label>
+                            </div>
+                            <div>
+                                <input onchange=""  type="checkbox" id="emerg" class="me-2">
+                                <label for="emerg"><i class="fas fa-heart-broken text-danger"></i>
+                                    Emergency</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="modal-footer  myfooter">
+                        <button onclick="clearInputs()" type="submit" class="  my-btn btn  btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button onclick="addContactInfo()" type="button"
+                            class="  my-btn btn saveBtn btn-primary d-flex justify-content-center align-items-center"><i
+                                style="font-size: 14px;" class="fas fa-check me-2"></i>
+                            Save Contact</button>
+
+                        <button onclick="updateContact()" type="submit" class="updateBtn btn btn-warning shadow-sm d-none justify-content-center align-items-center">Update Contact</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================================================== -->
+    <main>
+        <section class="summary">
+            <div class="container">
+                <div id="summaryData" class="row row-cols-2 row-cols-lg-3 g-3">
+                    
+
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================ -->
+        <!-- the agenda -->
+        <section class="agenda">
+            <div class="container">
+                <div class="row mt-3 g-4" >
+                    <!-- below : lg  [12 col] -->
+                    <!-- lg : up     [9 col] -->
+                    <div class="col-lg-9 " >
+                        <div class="inner">
+                            <div class="title">
+                                <h3 class="mb-0 h1 fw-bold">All Contacts</h3>
+                                <!-- todo  js    6   -->
+                                <p class="text-muted">Manage and organize your 6 contacts</p>
+                            </div>
+                            <!-- ======================= -->
+                            <!-- seacrch btn -->
+                            <div class="searchInput   mt-2 position-relative">
+                                <i
+                                    class="fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y  ms-3     text-muted"></i>
+                                <input oninput="displayAllContacts()" type="text" class="form-control ps-5 " id="searchInput"
+                                    placeholder="Search by name, phone, or email...">
+                            </div>
+                            <!-- ======================= -->
+                            <!-- the card of the contact -->
+                            <div id="rowData" class="contactCard row row-cols-1 row-cols-md-2  mt-4 g-4" >
+
+                               
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <!-- ======================================================== -->
+
+                    <!-- sidebar of fav and emergency ^_^  -->
+                    <div class="mysidebar col-lg-3   rounded-2 px-0 " >
+                        <!-- ======================================================== -->
+                        <!-- sidebar Fav -->
+                        <div class="mysidebar mysidebar-Fav rounded-top-2">
+                            <header class="rounded-top-2  d-flex align-items-center" style="background-color: #FFF9EC;">
+                                <i class="fas fa-star  mysidebar-icon-decore   me-2 "></i>
+
+                                <div>
+                                    <h4 class="f5 fw-bold mb-0">Favorites</h4>
+                                    <p class="text-secondary small">starred contacts</p>
+                                </div>
+
+
+                            </header>
+
+                            <div class="inner px-0">
+                                <!-- todo   try to remove the container -->
+                                <div class="container ">
+                                    <div
+                                        id="rowFavData"
+                                        class="row row-cols-1 row-cols-md-2 row-cols-lg-1  g-3 rounded-bottom-2 bg-white mt-2">
+
+
+
+                                        
+
+                                        
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <!-- ======================================================== -->
+                        <!-- sidebar Emergency -->
+                        <div class="mysidebar mysidebar-Fav rounded-top-2 mt-4 ">
+                            <header class="rounded-top-2  d-flex align-items-center bg-danger bg-opacity-10" >
+                                <i class="fas fa-heart-broken text-white  mysidebar-icon-decore   me-2"></i>
+
+                                <div>
+                                    <h4 class="f5 fw-bold mb-0">Emergency</h4>
+                                    <p class="text-secondary small">Important contacts</p>
+                                </div>
+
+
+                            </header>
+
+                            <div class="inner px-0">
+                                <!-- todo   try to remove the container -->
+                                <div class="container ">
+                                    <div
+                                        id="rowEmergencyData"
+                                        class="row row-cols-1 row-cols-md-2 row-cols-lg-1  g-3 rounded-bottom-2 bg-white mt-2">
+                                        
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+    </main>
+
+
+    <!-- <div class="w-50 m-auto nour"> -->
+        
+        <!-- <label > -->
+             <!-- <i class="fas fa-star text-warning "><input onclick="t()" type="checkbox" id="favv" hidden></i> -->
+        <!-- </label> -->
+        <!-- <br> -->
+        <!-- <input type="checkbox" id="emm">em -->
+
+
+    <!-- </div>  -->
+
+
 
 
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
